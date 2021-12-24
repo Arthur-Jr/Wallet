@@ -1,5 +1,7 @@
-# Link do Github pages
-  * https://arthur-jr.github.io/wallet/
+# Projeto Wallet
+
+## Github pages :eyes:
+  :arrow_right: https://arthur-jr.github.io/wallet/
 
 ---
 
@@ -16,20 +18,20 @@ Neste projeto foi desenvolvido uma carteira de controle de gastos com conversor 
 
 Projeto focado em praticar CRUD(Create, Read, Update, Delete) com estado/Redux do React.
 
-Api utilizada: API(https://economia.awesomeapi.com.br/json/all)
+[API que foi utilizada.](https://economia.awesomeapi.com.br/json/all)
 
 ---
 
 # Tecnologias utilizadas
 Neste projeto, foi utilizado:
 
-  * JavaScript
-  * React.JS - Class Component
-  * Redux
-  * RTL(React Testing Library) - Jest
-  * HTML5
-  * CSS3
-  * Mobile first
+  * JavaScript;
+  * React.JS - Class Component;
+  * Redux;
+  * RTL(React Testing Library) - Jest;
+  * HTML5;
+  * CSS3;
+  * Mobile first.
 
 ---
 
