@@ -22,7 +22,7 @@ Projeto focado em praticar CRUD(Create, Read, Update, Delete) com estado/Redux d
 
 ---
 
-# Tecnologias utilizadas
+## Tecnologias utilizadas
 Neste projeto, foi utilizado:
 
   * JavaScript;
@@ -32,6 +32,28 @@ Neste projeto, foi utilizado:
   * HTML5;
   * CSS3;
   * Mobile first.
+
+## Instalando Dependências
+
+Na raiz do projeto:
+```bash
+npm install
+``` 
+
+## Executando aplicação
+
+Na raiz do projeto:
+```bash
+npm start
+``` 
+
+## Executando Testes
+
+* Para rodar todos os testes:
+
+  ```
+    npm test
+  ```
 
 ---
 
