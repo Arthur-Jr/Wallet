@@ -35,6 +35,10 @@ Neste projeto, foi utilizado:
 
 ## Instalando Dependências
 
+Clone o repositório:
+
+```git clone git@github.com:Arthur-Jr/wallet.git ```
+
 Na raiz do projeto:
 ```bash
 npm install
