@@ -96,6 +96,10 @@
   margin-right: 3%;
 }
 
+.tbody-main tr:last-child {
+  margin-bottom: 45px;
+}
+
 tr td button img {
   height: 19px;
   width: 19px;

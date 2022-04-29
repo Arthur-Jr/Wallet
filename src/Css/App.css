@@ -12,10 +12,6 @@
   text-decoration: none;
 }
 
-.wallet-main {
-  height: 780px;
-}
-
 .section-main {
   background-color: var(--main-bg-color);
   display: flex;
@@ -33,6 +29,7 @@
   height: 3px;
   justify-content: center;
   padding: 20px;
+  position: fixed;
   width: 100%;
 }
 
