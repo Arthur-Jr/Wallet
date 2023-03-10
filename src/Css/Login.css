@@ -68,6 +68,12 @@
   color: white;
 }
 
+.change-page-status-btn {
+  background-color: inherit;
+  border: none;
+  font-size: 1.1em;
+}
+
 @media screen and ( min-width : 650px ) {
 
   .login-main {
@@ -141,5 +147,11 @@
     color: var(--main-bg-color);
     font-size: 5em;
     margin: 0 0 8%;
+  }
+
+  .change-page-status-btn:hover {
+    color: var(--main-bg-color);
+    cursor: pointer;
+    zoom: 1.2;
   }
 }

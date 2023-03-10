@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { logged } from '../Redux/actions';
 import Button from '../components/Controled-Components/Button';
 import Input from '../components/Controled-Components/Inputs';
+import registerLoginUser from '../api/registerLoginUser';
 import '../Css/Login.css';
 import logo from '../Image/new-logo.png';
 
@@ -13,8 +14,10 @@ class Login extends React.Component {
 
     this.state = {
       email: '',
+      password: '',
       emailStatus: true,
       passwordStatus: true,
+      isLogin: true,
     };
 
     this.handleEmail = this.handleEmail.bind(this);
@@ -41,28 +44,33 @@ class Login extends React.Component {
   handlePassword({ target: { value } }) {
     const PASSWORD_CONDITION = 6;
     if (value.length >= PASSWORD_CONDITION) {
-      this.setState({ passwordStatus: false });
+      this.setState({ password: value, passwordStatus: false });
     } else {
-      this.setState({ passwordStatus: true });
+      this.setState({ password: value, passwordStatus: true });
     }
   }
 
-  handleClick() {
-    const { email } = this.state;
+  async handleClick() {
+    const { email, password, isLogin } = this.state;
     const { login, history } = this.props;
     login(email);
+    console.log(await registerLoginUser({ username: email, password }, isLogin));
     history.push('/wallet/carteira');
   }
 
+  handlePageChange() {
+    this.setState((prev) => ({ isLogin: !prev.isLogin }));
+  }
+
   render() {
-    const { emailStatus, passwordStatus, email } = this.state;
+    const { emailStatus, passwordStatus, email, isLogin } = this.state;
     return (
       <main className="login-main">
         <div className="logo-div">
           <img src={ logo } alt="Wallet icon" />
         </div>
         <div className="form-div">
-          <h1 data-testid="title">Login</h1>
+          <h1 data-testid="title">{ isLogin ? 'Login' : 'Register' }</h1>
           <form className="login-form">
             <Input
               type="email"
@@ -83,12 +91,19 @@ class Login extends React.Component {
               />
             </label>
             <Button
-              text="Entrar"
+              text={ isLogin ? 'Login' : 'Registrar' }
               handleClick={ this.handleClick }
               status={ emailStatus || passwordStatus }
               className={ !emailStatus && !passwordStatus ? 'active' : '' }
             />
           </form>
+          <button
+            onClick={ () => this.handlePageChange() }
+            type="button"
+            className="change-page-status-btn"
+          >
+            { isLogin ? 'Registrar-se' : 'Login' }
+          </button>
         </div>
       </main>
     );
