@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Jwt from 'jsonwebtoken';
 import { logged } from '../Redux/actions';
 import Button from '../components/Controled-Components/Button';
 import Input from '../components/Controled-Components/Inputs';
@@ -18,11 +19,23 @@ class Login extends React.Component {
       emailStatus: true,
       passwordStatus: true,
       isLogin: true,
+      errorMessage: '',
     };
 
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { login, history } = this.props;
+    const token = Jwt.decode(localStorage.getItem('token'));
+    const timeAtMoment = new Date();
+
+    if (token && token.exp < timeAtMoment.getTime()) {
+      history.push('/wallet/carteira');
+      login(token.sub);
+    }
   }
 
   validateEmail(email) {
@@ -54,8 +67,14 @@ class Login extends React.Component {
     const { email, password, isLogin } = this.state;
     const { login, history } = this.props;
     login(email);
-    console.log(await registerLoginUser({ username: email, password }, isLogin));
-    history.push('/wallet/carteira');
+
+    const response = await registerLoginUser({ username: email, password }, isLogin);
+    if (response.token) {
+      localStorage.setItem('token', response.token);
+      history.push('/wallet/carteira');
+    }
+
+    this.setState({ errorMessage: response.message });
   }
 
   handlePageChange() {
@@ -63,7 +82,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { emailStatus, passwordStatus, email, isLogin } = this.state;
+    const { emailStatus, passwordStatus, email, isLogin, errorMessage } = this.state;
     return (
       <main className="login-main">
         <div className="logo-div">
@@ -97,6 +116,10 @@ class Login extends React.Component {
               className={ !emailStatus && !passwordStatus ? 'active' : '' }
             />
           </form>
+
+          { errorMessage.length > 0
+            && <span className="message-span">{errorMessage}</span> }
+
           <button
             onClick={ () => this.handlePageChange() }
             type="button"

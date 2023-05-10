@@ -68,6 +68,12 @@
   color: white;
 }
 
+.message-span {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: -3% 0 5%;
+}
+
 .change-page-status-btn {
   background-color: inherit;
   border: none;
@@ -79,7 +85,7 @@
   .login-main {
     background-color: white;
     flex-direction: row;
-    height: 100%;
+    height: 670px;
     min-height: 100%;
   }
 
@@ -97,6 +103,7 @@
     background: url('../Image/background-img.jpg') no-repeat;
     background-size: cover;
     flex-grow: 1;
+    height: 100%;
     justify-content: flex-start;
   }
 

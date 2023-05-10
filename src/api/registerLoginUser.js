@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const URL = 'https://wallet-api-production-d865.up.railway.app';
+const URL = process.env.REACT_APP_ENDPOINT || 'http://localhost:8080';
 
 const registerLoginUser = async (body, isLogin) => {
   try {
-    const jwtToken = await axios.post(`${URL}/${isLogin ? 'user/login' : 'user'}`, body);
-    return jwtToken;
+    const jwtToken = await axios.post(`${URL}/user${isLogin ? '/login' : ''}`, body);
+    return jwtToken.data;
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
