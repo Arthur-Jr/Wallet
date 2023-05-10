@@ -43,7 +43,7 @@ class Login extends React.Component {
       return false;
     }
     return true;
-    // Referência sobre o regex para email, neste link: 
+    // Referência sobre o regex para email, neste link:
     // https://www.w3resource.com/javascript/form/email-validation.php
   }
 
