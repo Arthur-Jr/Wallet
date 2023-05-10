@@ -68,6 +68,12 @@
   color: white;
 }
 
+.message-span {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: -3% 0 5%;
+}
+
 .change-page-status-btn {
   background-color: inherit;
   border: none;
