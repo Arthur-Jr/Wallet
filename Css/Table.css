@@ -1,0 +1,152 @@
+.table-main {
+  background-color: whitesmoke;
+  border-collapse: collapse;
+  font-family: Roboto , sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.thead-main {
+  align-items: center;
+  background-color: var(--main-bg-color);
+  color: white;
+  display: flex;
+  font-size: 1.1em;
+  height: 50px;
+  width: 100%;
+}
+
+.thead-main tr {
+  align-items: center;
+  background-color: var(--main-black-bg);
+  display: flex;
+  height: 90%;
+  justify-content: space-around;
+  padding: 5px;
+  width: 100%;
+}
+
+.thead-main tr th {
+  display: none;
+  text-align: center;
+  width: 100%;
+}
+
+.thead-main tr th:nth-child( 5 ) {
+  display: unset;
+}
+
+.thead-main tr th:nth-child( 3n+1 ):nth-child( -n+4 ) {
+  display: unset;
+}
+
+.tbody-main {
+  background-color: whitesmoke;
+  height: 100%;
+  width: 100%;
+}
+
+.tbody-main tr {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  font-size: 1.1em;
+  height: 50px;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.tbody-main tr:hover {
+  background-color: var(--main-bg-color);
+  color: white;
+  zoom: 1.25;
+}
+
+.tbody-main tr td {
+  display: none;
+  font-style: italic;
+  font-weight: 400;
+  text-align: center;
+  width: 100%;
+}
+
+.tbody-main tr td:nth-child( 5 ) {
+  display: unset;
+}
+
+.tbody-main tr td:nth-child( 3n+1 ):nth-child( -n+4 ) {
+  display: unset;
+}
+
+.tbody-main tr td button {
+  border: double var(--main-black-bg);
+  border-radius: 4px;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+}
+
+.tbody-main tr td .edit-btn {
+  background-color: yellow;
+  margin-right: 8%;
+}
+
+.tbody-main tr td .delete-btn {
+  background-color: red;
+  margin-right: 3%;
+}
+
+.tbody-main tr:last-child {
+  margin-bottom: 45px;
+}
+
+tr td button img {
+  height: 19px;
+  width: 19px;
+}
+
+@media screen and ( min-width : 650px ) {
+
+  .thead-main {
+    height: 100%;
+  }
+
+  .thead-main tr th:nth-child( -n+5 ) {
+    display: unset;
+  }
+
+  .thead-main tr th:last-child {
+    display: unset;
+  }
+
+  .tbody-main tr td:nth-child( -n+5 ) {
+    display: unset;
+  }
+
+  .tbody-main tr td:last-child {
+    display: unset;
+  }
+
+  .tbody-main tr td button:hover {
+    zoom: 1.05;
+  }
+}
+
+@media screen and ( min-width : 900px ) {
+
+  .thead-main {
+    align-items: center;
+    color: white;
+    display: flex;
+    font-size: 1.1em;
+  }
+
+  .thead-main tr th {
+    display: unset;
+  }
+
+  .tbody-main tr td {
+    display: unset;
+  }
+}
+

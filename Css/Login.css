@@ -1,0 +1,164 @@
+.login-main {
+  align-items: center;
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+}
+
+.login-main .logo-div {
+  display: flex;
+  justify-content: center;
+}
+
+.login-main img {
+  transform: rotate(-35deg);
+  width: 40%;
+}
+
+.login-main .form-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-main h1 {
+  font-family: Kaushan Script, cursive;
+  font-size: 3.5em;
+  letter-spacing: 1px;
+  margin: 5% 0;
+}
+
+.login-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 5%;
+  width: 100%;
+}
+
+.login-form label {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 4%;
+  width: 100%;
+}
+
+.login-form input {
+  border: solid rgb(27, 27, 27) 2px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  padding: 10px;
+  width: 90%;
+}
+
+.login-form button {
+  border: solid rgb(27, 27, 27) 2px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  margin: 3px 0 0;
+  padding: 15px;
+  width: 90%;
+}
+
+.login-form .active {
+  background-color: var(--main-black-bg);
+  color: white;
+}
+
+.message-span {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: -3% 0 5%;
+}
+
+.change-page-status-btn {
+  background-color: inherit;
+  border: none;
+  font-size: 1.1em;
+}
+
+@media screen and ( min-width : 650px ) {
+
+  .login-main {
+    background-color: white;
+    flex-direction: row;
+    height: 670px;
+    min-height: 100%;
+  }
+
+  .login-main div {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    min-width: 45%;
+  }
+
+  .login-main .logo-div {
+    align-items: flex-start;
+    background: url('../Image/background-img.jpg') no-repeat;
+    background-size: cover;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: flex-start;
+  }
+
+  .login-main .form-div {
+    background-color: whitesmoke;
+    height: 100%;
+  }
+
+  .login-main img {
+    background-color: var(--main-bg-color);
+    border-radius: 200px;
+    margin: 10px;
+    transform: rotate(-40deg);
+    width: 15%;
+  }
+
+  .login-main .form-div .login-form {
+    padding: 10px;
+    width: 90%;
+  }
+
+  .login-main .form-div .login-form label {
+    margin: 0 0 3%;
+    width: 80%;
+  }
+
+  .login-form input {
+    border: solid var(--main-bg-color);
+  }
+
+  .login-form button {
+    border: solid var(--main-bg-color) 2px;
+    margin: 5px 0 0;
+    width: 72%;
+  }
+
+  .login-form .active {
+    background-color: var(--main-bg-color);
+  }
+
+  .login-form .active:hover {
+    cursor: pointer;
+    font-weight: 900;
+    zoom: 1.1;
+  }
+
+  .login-main h1 {
+    color: var(--main-bg-color);
+    font-size: 5em;
+    margin: 0 0 8%;
+  }
+
+  .change-page-status-btn:hover {
+    color: var(--main-bg-color);
+    cursor: pointer;
+    zoom: 1.2;
+  }
+}
