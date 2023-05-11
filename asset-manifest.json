@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/wallet/static/css/main.ec8982b2.chunk.css",
+    "main.js": "/wallet/static/js/main.c412cf57.chunk.js",
+    "main.js.map": "/wallet/static/js/main.c412cf57.chunk.js.map",
+    "runtime-main.js": "/wallet/static/js/runtime-main.40843306.js",
+    "runtime-main.js.map": "/wallet/static/js/runtime-main.40843306.js.map",
+    "static/js/2.fbdfe551.chunk.js": "/wallet/static/js/2.fbdfe551.chunk.js",
+    "static/js/2.fbdfe551.chunk.js.map": "/wallet/static/js/2.fbdfe551.chunk.js.map",
+    "index.html": "/wallet/index.html",
+    "precache-manifest.dade892d3445476b1ae6915912215342.js": "/wallet/precache-manifest.dade892d3445476b1ae6915912215342.js",
+    "service-worker.js": "/wallet/service-worker.js",
+    "static/css/main.ec8982b2.chunk.css.map": "/wallet/static/css/main.ec8982b2.chunk.css.map",
+    "static/js/2.fbdfe551.chunk.js.LICENSE.txt": "/wallet/static/js/2.fbdfe551.chunk.js.LICENSE.txt",
+    "static/js/main.c412cf57.chunk.js.LICENSE.txt": "/wallet/static/js/main.c412cf57.chunk.js.LICENSE.txt",
+    "static/media/Delete.png": "/wallet/static/media/Delete.41c8548e.png",
+    "static/media/Edit.png": "/wallet/static/media/Edit.7ee6892c.png",
+    "static/media/Login.css": "/wallet/static/media/background-img.ebf4c60f.jpg",
+    "static/media/gitHubIcon.svg": "/wallet/static/media/gitHubIcon.f25d8a38.svg",
+    "static/media/linkedinIcon.svg": "/wallet/static/media/linkedinIcon.65220039.svg",
+    "static/media/new-logo.png": "/wallet/static/media/new-logo.67b4b987.png",
+    "static/media/notFound.gif": "/wallet/static/media/notFound.1ba131e9.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.40843306.js",
+    "static/js/2.fbdfe551.chunk.js",
+    "static/css/main.ec8982b2.chunk.css",
+    "static/js/main.c412cf57.chunk.js"
+  ]
+}
