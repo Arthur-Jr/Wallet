@@ -8,6 +8,7 @@ export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const SET_SCREEN = 'SET_SCREEN';
 export const SET_FORM_STATUS = 'SET_FORM_STATUS';
 export const SET_DETAILS_STATUS = 'SET_DETAILS_STATUS';
+export const ADD_MULTI_EXPENSES = 'ADD_MULTI_EXPENSES';
 
 export const logged = (email) => ({ type: LOGGED_INFO, email });
 
@@ -30,6 +31,8 @@ export function fetchApi() {
 }
 
 export const expense = (infos) => ({ type: ADD_EXPENSE, infos });
+
+export const addMultiExpenses = (expenses) => ({ type: ADD_MULTI_EXPENSES, expenses });
 
 export const modifyExpenses = (expenses) => ({ type: MODIFY_EXPENSE, expenses });
 
