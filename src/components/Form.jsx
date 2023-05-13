@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { expense, fetchApi, edit, modifyExpenses, setFormStatus } from '../Redux/actions';
+import { expense, edit, modifyExpenses, setFormStatus } from '../Redux/actions';
 import Input from './Controled-Components/Inputs';
 import Select from './Controled-Components/select';
 import Button from './Controled-Components/Button';
+import addNewExpense from '../api/addExpense';
+import paymentMethods from '../util/paymentMethods';
+import Tags from '../util/Tags';
 
 const DEFAULT_STATE = {
   value: '',
@@ -13,8 +16,6 @@ const DEFAULT_STATE = {
   method: 'Dinheiro',
   tag: 'Alimentação',
 };
-const PAGAMENTO = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
-const MOTIVO = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 const PHONE_WIDTH_PX = 650;
 
 class Form extends React.Component {
@@ -38,26 +39,22 @@ class Form extends React.Component {
     this.handleMCancel = this.handleMCancel.bind(this);
   }
 
-  getExchange() {
-    const { allCurrency } = this.props;
-    const initials = Object.keys(allCurrency);
-
-    return initials.reduce((acc, currency) => {
-      acc[currency] = allCurrency[currency];
-      return acc;
-    }, {});
-  }
-
   handleChange({ target: { name, value } }) {
     this.setState({ [name]: value });
   }
 
-  handleClick() {
-    const { addExpense, fetchCurrency, expenses, setForm } = this.props;
-    fetchCurrency();
-    const exchangeRates = this.getExchange();
-    const infos = { id: expenses.length, ...this.state, exchangeRates };
-    addExpense(infos);
+  async handleClick() {
+    const { addExpense, setForm, allCurrency } = this.props;
+    const { tag, method } = this.state;
+
+    const newExpense = await addNewExpense(localStorage.getItem('token'), {
+      ...this.state,
+      method: paymentMethods[method],
+      tag: Tags[tag],
+      exchangeRates: Object.values(allCurrency),
+    });
+
+    if (newExpense) addExpense(newExpense);
     this.setState({ ...DEFAULT_STATE });
 
     if (window.innerWidth < PHONE_WIDTH_PX) {
@@ -133,14 +130,14 @@ class Form extends React.Component {
         <Select
           text="Método"
           name="method"
-          item={ PAGAMENTO }
+          item={ Object.keys(paymentMethods) }
           handleChange={ this.handleChange }
           value={ method }
         />
         <Select
           text="Tag"
           name="tag"
-          item={ MOTIVO }
+          item={ Object.keys(Tags) }
           handleChange={ this.handleChange }
           value={ tag }
         />
@@ -162,7 +159,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (infos) => dispatch(expense(infos)),
-  fetchCurrency: () => dispatch(fetchApi()),
   modifyExpense: (expenses) => dispatch(modifyExpenses(expenses)),
   editExpense: (item) => dispatch(edit(item)),
   setForm: (status) => dispatch(setFormStatus(status)),
@@ -176,7 +172,6 @@ Form.defaultProps = {
 Form.propTypes = {
   allCurrency: PropTypes.objectOf(PropTypes.object),
   addExpense: PropTypes.func.isRequired,
-  fetchCurrency: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   expenseToEdit: PropTypes.shape({
     value: PropTypes.string,
