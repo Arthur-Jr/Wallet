@@ -1,30 +1,29 @@
 {
   "files": {
-    "main.css": "/wallet/static/css/main.77c4bd56.chunk.css",
-    "main.js": "/wallet/static/js/main.af454174.chunk.js",
-    "main.js.map": "/wallet/static/js/main.af454174.chunk.js.map",
+    "main.css": "/wallet/static/css/main.41e8241d.chunk.css",
+    "main.js": "/wallet/static/js/main.ecae1474.chunk.js",
+    "main.js.map": "/wallet/static/js/main.ecae1474.chunk.js.map",
     "runtime-main.js": "/wallet/static/js/runtime-main.40843306.js",
     "runtime-main.js.map": "/wallet/static/js/runtime-main.40843306.js.map",
-    "static/js/2.e4bc2856.chunk.js": "/wallet/static/js/2.e4bc2856.chunk.js",
-    "static/js/2.e4bc2856.chunk.js.map": "/wallet/static/js/2.e4bc2856.chunk.js.map",
+    "static/js/2.e0c8a774.chunk.js": "/wallet/static/js/2.e0c8a774.chunk.js",
+    "static/js/2.e0c8a774.chunk.js.map": "/wallet/static/js/2.e0c8a774.chunk.js.map",
     "index.html": "/wallet/index.html",
-    "precache-manifest.5716f904966c3fe5a362fbf0d3555a65.js": "/wallet/precache-manifest.5716f904966c3fe5a362fbf0d3555a65.js",
+    "precache-manifest.cd2db8a08e5b847bb7aa8008659eab61.js": "/wallet/precache-manifest.cd2db8a08e5b847bb7aa8008659eab61.js",
     "service-worker.js": "/wallet/service-worker.js",
-    "static/css/main.77c4bd56.chunk.css.map": "/wallet/static/css/main.77c4bd56.chunk.css.map",
-    "static/js/2.e4bc2856.chunk.js.LICENSE.txt": "/wallet/static/js/2.e4bc2856.chunk.js.LICENSE.txt",
-    "static/js/main.af454174.chunk.js.LICENSE.txt": "/wallet/static/js/main.af454174.chunk.js.LICENSE.txt",
+    "static/css/main.41e8241d.chunk.css.map": "/wallet/static/css/main.41e8241d.chunk.css.map",
+    "static/js/2.e0c8a774.chunk.js.LICENSE.txt": "/wallet/static/js/2.e0c8a774.chunk.js.LICENSE.txt",
+    "static/js/main.ecae1474.chunk.js.LICENSE.txt": "/wallet/static/js/main.ecae1474.chunk.js.LICENSE.txt",
     "static/media/Delete.png": "/wallet/static/media/Delete.41c8548e.png",
     "static/media/Edit.png": "/wallet/static/media/Edit.7ee6892c.png",
     "static/media/Login.css": "/wallet/static/media/background-img.ebf4c60f.jpg",
     "static/media/gitHubIcon.svg": "/wallet/static/media/gitHubIcon.f25d8a38.svg",
     "static/media/linkedin.svg": "/wallet/static/media/linkedin.65220039.svg",
-    "static/media/new-logo.png": "/wallet/static/media/new-logo.67b4b987.png",
-    "static/media/notFound.gif": "/wallet/static/media/notFound.1ba131e9.gif"
+    "static/media/new-logo.png": "/wallet/static/media/new-logo.67b4b987.png"
   },
   "entrypoints": [
     "static/js/runtime-main.40843306.js",
-    "static/js/2.e4bc2856.chunk.js",
-    "static/css/main.77c4bd56.chunk.css",
-    "static/js/main.af454174.chunk.js"
+    "static/js/2.e0c8a774.chunk.js",
+    "static/css/main.41e8241d.chunk.css",
+    "static/js/main.ecae1474.chunk.js"
   ]
 }
