@@ -8,6 +8,8 @@ import Button from './Controled-Components/Button';
 import addNewExpense from '../api/addExpense';
 import paymentMethods from '../util/paymentMethods';
 import Tags from '../util/Tags';
+import editExpense from '../api/editExpense';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 const DEFAULT_STATE = {
   value: '',
@@ -37,6 +39,7 @@ class Form extends React.Component {
     this.handleEditClick = this.handleEditClick.bind(this);
     this.addButton = this.addButton.bind(this);
     this.handleMCancel = this.handleMCancel.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -47,12 +50,15 @@ class Form extends React.Component {
     const { addExpense, setForm, allCurrency } = this.props;
     const { tag, method } = this.state;
 
-    const newExpense = await addNewExpense(localStorage.getItem('token'), {
-      ...this.state,
-      method: paymentMethods[method],
-      tag: Tags[tag],
-      exchangeRates: Object.values(allCurrency),
-    });
+    const newExpense = await addNewExpense(
+      localStorage.getItem(localStorageVarNames.jwtToken),
+      {
+        ...this.state,
+        method: paymentMethods[method],
+        tag: Tags[tag],
+        exchangeRates: Object.values(allCurrency),
+      },
+    );
 
     if (newExpense) addExpense(newExpense);
     this.setState({ ...DEFAULT_STATE });
@@ -62,18 +68,31 @@ class Form extends React.Component {
     }
   }
 
-  handleEditClick() {
+  async handleEditClick() {
     const {
-      expenseToEdit: { id, exchangeRates },
+      expenseToEdit: { expenseId, exchangeRates },
       expenses,
       modifyExpense,
-      editExpense,
-      setForm } = this.props;
-    const newExpenses = expenses.filter((item) => item.id !== id);
-    const expensesWithEdit = [{ id, ...this.state, exchangeRates }, ...newExpenses];
-    expensesWithEdit.sort((a, b) => a.id - b.id);
-    modifyExpense(expensesWithEdit);
-    editExpense();
+      editExpenseStatus,
+      setForm,
+    } = this.props;
+    const { tag, method } = this.state;
+
+    const modifiedExpenses = expenses.filter((item) => item.expenseId !== expenseId);
+    const editedExpense = await editExpense(
+      expenseId,
+      {
+        expenseId,
+        ...this.state,
+        exchangeRates,
+        tag: Tags[tag],
+        method: paymentMethods[method],
+      },
+      localStorage.getItem(localStorageVarNames.jwtToken),
+    );
+    const expensesWithEditedExpense = [editedExpense, ...modifiedExpenses];
+    modifyExpense(expensesWithEditedExpense);
+    editExpenseStatus();
 
     if (window.innerWidth < PHONE_WIDTH_PX) {
       setForm(false);
@@ -81,9 +100,9 @@ class Form extends React.Component {
   }
 
   handleMCancel() {
-    const { setForm, edit: boolEdit, editExpense } = this.props;
+    const { setForm, edit: boolEdit, editExpenseStatus } = this.props;
     setForm(false);
-    return boolEdit && editExpense();
+    return boolEdit && editExpenseStatus();
   }
 
   addButton(text) {
@@ -100,7 +119,7 @@ class Form extends React.Component {
 
   render() {
     const { value, description, currency, method, tag } = this.state;
-    const { allCurrency, edit: boolEdit, editExpense, mobileType } = this.props;
+    const { allCurrency, edit: boolEdit, editExpenseStatus, mobileType } = this.props;
     const initials = Object.keys(allCurrency);
 
     return (
@@ -144,7 +163,7 @@ class Form extends React.Component {
         { !boolEdit ? this.addButton('Adicionar') : this.addButton('Editar') }
         { mobileType && <Button text="Cancelar" handleClick={ this.handleMCancel } /> }
         { boolEdit && !mobileType
-          && <Button text="Cancelar" handleClick={ () => editExpense() } /> }
+          && <Button text="Cancelar" handleClick={ () => editExpenseStatus() } /> }
       </>
     );
   }
@@ -160,7 +179,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (infos) => dispatch(expense(infos)),
   modifyExpense: (expenses) => dispatch(modifyExpenses(expenses)),
-  editExpense: (item) => dispatch(edit(item)),
+  editExpenseStatus: (item) => dispatch(edit(item)),
   setForm: (status) => dispatch(setFormStatus(status)),
 });
 
@@ -174,17 +193,17 @@ Form.propTypes = {
   addExpense: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   expenseToEdit: PropTypes.shape({
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     description: PropTypes.string,
     currency: PropTypes.string,
     method: PropTypes.string,
     tag: PropTypes.string,
-    id: PropTypes.number,
-    exchangeRates: PropTypes.objectOf(PropTypes.object),
+    expenseId: PropTypes.string,
+    exchangeRates: PropTypes.arrayOf(PropTypes.object),
   }),
   edit: PropTypes.bool.isRequired,
   modifyExpense: PropTypes.func.isRequired,
-  editExpense: PropTypes.func.isRequired,
+  editExpenseStatus: PropTypes.func.isRequired,
   setForm: PropTypes.func.isRequired,
   mobileType: PropTypes.bool.isRequired,
 };
