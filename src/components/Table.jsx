@@ -9,6 +9,7 @@ import { setDetailsStatus } from '../Redux/actions';
 import getKeyByValue from '../globalFuncs/getObjectKeyByValue';
 import Tags from '../util/Tags';
 import paymentMethods from '../util/paymentMethods';
+import sortExpenses from '../globalFuncs/sortExpenses';
 
 class Table extends React.Component {
   constructor() {
@@ -75,7 +76,7 @@ class Table extends React.Component {
             </tr>
           </thead>
           <tbody className="tbody-main">
-            { expenses.map((expense) => (
+            { sortExpenses(expenses).map((expense) => (
               <tr
                 key={ expense.expenseId }
                 onClick={ (e) => this.handleExpenseClick(expense, e) }
