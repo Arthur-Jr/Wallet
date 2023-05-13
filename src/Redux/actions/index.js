@@ -1,5 +1,4 @@
 // Coloque aqui suas actions
-export const LOGGED_INFO = 'LOGGED_INFO';
 export const CURRENCY = 'CURRENCY';
 export const LOADING = 'LOADING';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
@@ -9,8 +8,6 @@ export const SET_SCREEN = 'SET_SCREEN';
 export const SET_FORM_STATUS = 'SET_FORM_STATUS';
 export const SET_DETAILS_STATUS = 'SET_DETAILS_STATUS';
 export const ADD_MULTI_EXPENSES = 'ADD_MULTI_EXPENSES';
-
-export const logged = (email) => ({ type: LOGGED_INFO, email });
 
 export const edit = (expense) => ({ type: EDIT_EXPENSE, expense });
 
