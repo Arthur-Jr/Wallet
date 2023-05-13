@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Jwt from 'jsonwebtoken';
+import { HttpStatusCode } from 'axios';
 import { logged } from '../Redux/actions';
 import Button from '../components/Controled-Components/Button';
 import Input from '../components/Controled-Components/Inputs';
 import registerLoginUser from '../api/registerLoginUser';
 import '../Css/Login.css';
 import logo from '../Image/new-logo.png';
+import getAllExpenses from '../api/getAllExpenses';
 
 class Login extends React.Component {
   constructor(props) {
@@ -32,9 +34,14 @@ class Login extends React.Component {
     const token = Jwt.decode(localStorage.getItem('token'));
     const timeAtMoment = new Date();
 
-    if (token && token.exp < timeAtMoment.getTime()) {
-      history.push('/wallet/carteira');
-      login(token.sub);
+    if (token) {
+      getAllExpenses(localStorage.getItem('token')).then((response) => {
+        if (response.status !== HttpStatusCode.Forbidden
+          && token.exp < timeAtMoment.getTime()) {
+          history.push('/wallet/carteira');
+          login(token.sub);
+        }
+      });
     }
   }
 
