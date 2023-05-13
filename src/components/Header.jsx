@@ -14,11 +14,13 @@ class Header extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleClick() {
-    const { setForm } = this.props;
-    setForm(true);
+  getEmailFromToken() {
+    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
+    if (token) return token.sub;
+    return null;
   }
 
   sumExpenses() {
@@ -31,6 +33,17 @@ class Header extends React.Component {
     }, 0);
   }
 
+  handleLogout() {
+    const { history } = this.props;
+    localStorage.removeItem(localStorageVarNames.jwtToken);
+    history.push('/wallet');
+  }
+
+  handleClick() {
+    const { setForm } = this.props;
+    setForm(true);
+  }
+
   render() {
     const { mobileButton, formStatus } = this.props;
 
@@ -39,9 +52,17 @@ class Header extends React.Component {
         <section className="main-section">
           <h1>MyWallet</h1>
           <div>
-            <span data-testid="email-field">
-              { Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken)).sub }
-            </span>
+            <div className="logout-email-div">
+              <span data-testid="email-field" className="email-field">
+                { this.getEmailFromToken() }
+              </span>
+
+              <span className="cross-bar"> / </span>
+
+              <button type="button" className="logout-btn" onClick={ this.handleLogout }>
+                logout
+              </button>
+            </div>
             <span
               data-testid="total-field"
             >
@@ -83,6 +104,9 @@ Header.propTypes = {
   mobileButton: PropTypes.bool.isRequired,
   formStatus: PropTypes.bool.isRequired,
   setForm: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

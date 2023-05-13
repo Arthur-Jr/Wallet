@@ -49,10 +49,12 @@ class Wallet extends React.Component {
   }
 
   render() {
+    const { history } = this.props;
+
     return (
       <main className="wallet-main">
         <section className="section-main">
-          <Header />
+          <Header history={ history } />
           <Table />
         </section>
         <Footer />
