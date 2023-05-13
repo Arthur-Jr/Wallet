@@ -6,9 +6,9 @@ const getAllExpenses = async (token) => {
   try {
     const header = { headers: { Authorization: `Bearer ${token}` } };
     const userData = await axios.get(`${URL}/user`, header);
-    return userData.data.expensesList;
+    return userData;
   } catch (e) {
-    return [];
+    return e.response;
   }
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Jwt from 'jsonwebtoken';
+import { HttpStatusCode } from 'axios';
 import {
   fetchApi, setFormStatus, setScreenType, addMultiExpenses,
 } from '../Redux/actions';
@@ -20,12 +21,18 @@ class Wallet extends React.Component {
 
     const token = Jwt.decode(localStorage.getItem('token'));
     const timeAtMoment = new Date();
-    if (!token || !token.exp > timeAtMoment.getTime()) {
+
+    if (!token) {
       history.push('/wallet');
     }
 
-    getAllExpenses(localStorage.getItem('token'))
-      .then((expenses) => addExpenses(expenses));
+    getAllExpenses(localStorage.getItem('token')).then((response) => {
+      if (response.status === HttpStatusCode.Forbidden
+        || token.exp > timeAtMoment.getTime()) {
+        history.push('/wallet');
+      }
+      return addExpenses(response.data.expensesList);
+    });
   }
 
   checkSize() {
