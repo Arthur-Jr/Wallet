@@ -76,9 +76,9 @@ class Login extends React.Component {
     if (response.token) {
       localStorage.setItem('token', response.token);
       history.push('/wallet/carteira');
+    } else {
+      this.setState({ errorMessage: response.message });
     }
-
-    this.setState({ errorMessage: response.message });
   }
 
   handlePageChange() {
