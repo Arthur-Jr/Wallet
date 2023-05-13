@@ -6,6 +6,9 @@ import '../Css/Table.css';
 import MobileDetails from './MobileDetails';
 import DeleteEditButtons from './DeleteEditButtons';
 import { setDetailsStatus } from '../Redux/actions';
+import getKeyByValue from '../globalFuncs/getObjectKeyByValue';
+import Tags from '../util/Tags';
+import paymentMethods from '../util/paymentMethods';
 
 class Table extends React.Component {
   constructor() {
@@ -29,21 +32,23 @@ class Table extends React.Component {
   }
 
   createTr(expense) {
-    const { description, tag, method, value, currency, exchangeRates, id } = expense;
-    const { ask, name } = exchangeRates[currency];
+    const {
+      description, tag, method, value, currency, exchangeRates, expenseId,
+    } = expense;
+    const { ask, name } = exchangeRates.find(({ code }) => code === currency);
 
     return (
       <>
         <td>{ description }</td>
-        <td>{ tag }</td>
-        <td>{ method }</td>
+        <td>{ getKeyByValue(Tags, tag) }</td>
+        <td>{ getKeyByValue(paymentMethods, method) }</td>
         <td>{ Number(value).toFixed(2) }</td>
         <td>{ name.slice(0, name.indexOf('/')) }</td>
         <td>{ Number(ask).toFixed(2) }</td>
         <td>{ getCambio(value, ask).toFixed(2) }</td>
         <td>Real</td>
         <td>
-          <DeleteEditButtons expenseId={ id } />
+          <DeleteEditButtons expenseId={ expenseId } />
         </td>
       </>
     );
@@ -72,7 +77,7 @@ class Table extends React.Component {
           <tbody className="tbody-main">
             { expenses.map((expense) => (
               <tr
-                key={ expense.id }
+                key={ expense.expenseId }
                 onClick={ (e) => this.handleExpenseClick(expense, e) }
               >
                 {this.createTr(expense)}

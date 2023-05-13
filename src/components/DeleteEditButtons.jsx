@@ -75,7 +75,7 @@ DeleteEditButtons.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   modifyExpense: PropTypes.func.isRequired,
   editExpense: PropTypes.func.isRequired,
-  expenseId: PropTypes.number.isRequired,
+  expenseId: PropTypes.string.isRequired,
   setDetails: PropTypes.func.isRequired,
   setForm: PropTypes.func.isRequired,
 };

@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Jwt from 'jsonwebtoken';
 import HeaderForm from './HeaderForm';
 import getCambio from '../globalFuncs/CambioFunc';
 import Button from './Controled-Components/Button';
 import '../Css/Header.css';
 import { setFormStatus } from '../Redux/actions';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 class Header extends React.Component {
   constructor(props) {
@@ -23,21 +25,23 @@ class Header extends React.Component {
     const { expenses } = this.props;
 
     return expenses.reduce((acc, { currency, value, exchangeRates }) => {
-      const { ask } = exchangeRates[currency];
+      const { ask } = exchangeRates.find(({ code }) => code === currency);
       acc += getCambio(value, ask);
       return acc;
     }, 0);
   }
 
   render() {
-    const { email, mobileButton, formStatus } = this.props;
+    const { mobileButton, formStatus } = this.props;
 
     return (
       <header className="header-main">
         <section className="main-section">
           <h1>MyWallet</h1>
           <div>
-            <span data-testid="email-field">{ email }</span>
+            <span data-testid="email-field">
+              { Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken)).sub }
+            </span>
             <span
               data-testid="total-field"
             >
@@ -69,14 +73,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
   expenses: state.wallet.expenses,
   mobileButton: state.checkScreen.mobileType,
   formStatus: state.checkScreen.formStatus,
 });
 
 Header.propTypes = {
-  email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   mobileButton: PropTypes.bool.isRequired,
   formStatus: PropTypes.bool.isRequired,
