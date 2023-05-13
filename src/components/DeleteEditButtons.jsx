@@ -5,6 +5,8 @@ import editIcon from '../Image/Edit.png';
 import deleteIcon from '../Image/Delete.png';
 import { modifyExpenses,
   edit, setDetailsStatus, setFormStatus } from '../Redux/actions/index';
+import deleteExpense from '../api/deleteExpense';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 const PHONE_WIDTH_PX = 650;
 
@@ -22,12 +24,13 @@ class DeleteEditButtons extends React.Component {
     }
   }
 
-  handleDelete(id) {
+  async handleDelete(id) {
     const { expenses, modifyExpense, setDetails } = this.props;
     const newExpenses = expenses.filter((expense) => (
-      expense.id !== id
+      expense.expenseId !== id
     ));
     modifyExpense(newExpenses);
+    await deleteExpense(localStorage.getItem(localStorageVarNames.jwtToken), id);
 
     if (window.innerWidth < PHONE_WIDTH_PX) {
       setDetails();
