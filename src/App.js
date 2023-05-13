@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { setFormStatus, setScreenType } from './Redux/actions';
 import Login from './pages/Login';
 import Wallet from './pages/Wallet';
-import NotFound from './components/NotFound';
 import './Css/App.css';
 
 function App({ setScreen, setForm }) {
@@ -31,7 +30,6 @@ function App({ setScreen, setForm }) {
     <Switch>
       <Route path="/wallet/carteira" component={ Wallet } />
       <Route exact path="/wallet/" component={ Login } />
-      <Route path="/wallet/*" component={ NotFound } />
     </Switch>
   );
 }
