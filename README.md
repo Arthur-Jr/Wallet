@@ -2,6 +2,8 @@
 
 ## Github pages :eyes:
   :arrow_right: https://arthur-jr.github.io/wallet/
+  
+  conta default: email = test@email.com / password: test123
 
 ---
 
