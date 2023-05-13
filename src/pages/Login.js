@@ -1,13 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Jwt from 'jsonwebtoken';
-import { logged } from '../Redux/actions';
+import { HttpStatusCode } from 'axios';
 import Button from '../components/Controled-Components/Button';
 import Input from '../components/Controled-Components/Inputs';
 import registerLoginUser from '../api/registerLoginUser';
 import '../Css/Login.css';
 import logo from '../Image/new-logo.png';
+import getAllExpenses from '../api/getAllExpenses';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,13 +29,17 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    const { login, history } = this.props;
-    const token = Jwt.decode(localStorage.getItem('token'));
+    const { history } = this.props;
+    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
     const timeAtMoment = new Date();
 
-    if (token && token.exp < timeAtMoment.getTime()) {
-      history.push('/wallet/carteira');
-      login(token.sub);
+    if (token) {
+      getAllExpenses(localStorage.getItem('token')).then((response) => {
+        if (response.status !== HttpStatusCode.Forbidden
+          && token.exp < timeAtMoment.getTime()) {
+          history.push('/wallet/carteira');
+        }
+      });
     }
   }
 
@@ -65,16 +70,15 @@ class Login extends React.Component {
 
   async handleClick() {
     const { email, password, isLogin } = this.state;
-    const { login, history } = this.props;
-    login(email);
+    const { history } = this.props;
 
     const response = await registerLoginUser({ username: email, password }, isLogin);
     if (response.token) {
       localStorage.setItem('token', response.token);
       history.push('/wallet/carteira');
+    } else {
+      this.setState({ errorMessage: response.message });
     }
-
-    this.setState({ errorMessage: response.message });
   }
 
   handlePageChange() {
@@ -133,15 +137,14 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  login: (email) => dispatch(logged(email)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   login: (email) => dispatch(logged(email)),
+// });
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

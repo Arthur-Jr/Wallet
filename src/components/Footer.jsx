@@ -1,6 +1,6 @@
 import React from 'react';
 import gitIcon from '../Image/gitHubIcon.svg';
-import linkedinIcon from '../Image/linkedinIcon.svg';
+import linkedinIcon from '../Image/linkedin.svg';
 
 class Footer extends React.Component {
   openSocial(url) {

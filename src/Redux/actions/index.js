@@ -1,5 +1,4 @@
 // Coloque aqui suas actions
-export const LOGGED_INFO = 'LOGGED_INFO';
 export const CURRENCY = 'CURRENCY';
 export const LOADING = 'LOADING';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
@@ -8,8 +7,7 @@ export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const SET_SCREEN = 'SET_SCREEN';
 export const SET_FORM_STATUS = 'SET_FORM_STATUS';
 export const SET_DETAILS_STATUS = 'SET_DETAILS_STATUS';
-
-export const logged = (email) => ({ type: LOGGED_INFO, email });
+export const ADD_MULTI_EXPENSES = 'ADD_MULTI_EXPENSES';
 
 export const edit = (expense) => ({ type: EDIT_EXPENSE, expense });
 
@@ -30,6 +28,8 @@ export function fetchApi() {
 }
 
 export const expense = (infos) => ({ type: ADD_EXPENSE, infos });
+
+export const addMultiExpenses = (expenses) => ({ type: ADD_MULTI_EXPENSES, expenses });
 
 export const modifyExpenses = (expenses) => ({ type: MODIFY_EXPENSE, expenses });
 

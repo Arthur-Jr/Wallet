@@ -116,6 +116,32 @@
   color: white;
 }
 
+.header-main .main-section .logout-email-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  width: 37vw;
+}
+
+.cross-bar {
+  display: none;
+}
+
+.header-main .main-section .logout-btn {
+  background-color: inherit;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: Kaushan Script, cursive;
+  font-size: 0.9em;
+  font-style: italic;
+  margin: 5px 0 5px 7px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @media screen and ( min-width : 650px ) {
 
   .header-main {
@@ -141,7 +167,21 @@
     flex-direction: column-reverse;
     font-size: 1.3em;
     margin-right: 20px;
-    width: 30%;
+    width: 50%;
+  }
+
+  .cross-bar {
+    display: inherit;
+  }
+
+  .header-main .main-section .logout-btn {
+    font-size: 0.7em;
+    margin: 0 0 5px;
+    position: inherit;
+  }
+
+  .header-main .main-section .logout-btn:hover {
+    text-decoration: underline;
   }
 
   .header-main .form-section {
@@ -201,6 +241,12 @@
   }
 }
 
+@media screen and ( min-width : 780px ) {
+  .header-main .main-section .logout-email-div {
+    width: 63%;
+  }
+}
+
 @media screen and ( min-width : 900px ) {
 
   .header-main .main-section h1 {
@@ -211,6 +257,10 @@
   .header-main .main-section div {
     font-size: 1.4em;
     margin-right: 30px;
+  }
+
+  .header-main .main-section .logout-email-div {
+    width: 61%;
   }
 
   .header-main .form-section form label {
@@ -228,5 +278,29 @@
     height: 50%;
     margin-bottom: 7px;
     width: 80%;
+  }
+}
+
+@media screen and ( min-width : 1040px ) {
+  .header-main .main-section .logout-email-div {
+    width: 30vw;
+  }
+}
+
+@media screen and ( min-width : 1150px ) {
+  .header-main .main-section .logout-email-div {
+    width: 25vw;
+  }
+}
+
+@media screen and ( min-width : 1400px ) {
+  .header-main .main-section .logout-email-div {
+    width: 20vw;
+  }
+}
+
+@media screen and ( min-width : 1600px ) {
+  .header-main .main-section .logout-email-div {
+    width: 18vw;
   }
 }

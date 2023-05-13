@@ -1,17 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Jwt from 'jsonwebtoken';
 import HeaderForm from './HeaderForm';
 import getCambio from '../globalFuncs/CambioFunc';
 import Button from './Controled-Components/Button';
 import '../Css/Header.css';
 import { setFormStatus } from '../Redux/actions';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  getEmailFromToken() {
+    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
+    if (token) return token.sub;
+    return null;
+  }
+
+  sumExpenses() {
+    const { expenses } = this.props;
+
+    return expenses.reduce((acc, { currency, value, exchangeRates }) => {
+      const { ask } = exchangeRates.find(({ code }) => code === currency);
+      acc += getCambio(value, ask);
+      return acc;
+    }, 0);
+  }
+
+  handleLogout() {
+    const { history } = this.props;
+    localStorage.removeItem(localStorageVarNames.jwtToken);
+    history.push('/wallet');
   }
 
   handleClick() {
@@ -19,25 +44,25 @@ class Header extends React.Component {
     setForm(true);
   }
 
-  sumExpenses() {
-    const { expenses } = this.props;
-
-    return expenses.reduce((acc, { currency, value, exchangeRates }) => {
-      const { ask } = exchangeRates[currency];
-      acc += getCambio(value, ask);
-      return acc;
-    }, 0);
-  }
-
   render() {
-    const { email, mobileButton, formStatus } = this.props;
+    const { mobileButton, formStatus } = this.props;
 
     return (
       <header className="header-main">
         <section className="main-section">
           <h1>MyWallet</h1>
           <div>
-            <span data-testid="email-field">{ email }</span>
+            <div className="logout-email-div">
+              <span data-testid="email-field" className="email-field">
+                { this.getEmailFromToken() }
+              </span>
+
+              <span className="cross-bar"> / </span>
+
+              <button type="button" className="logout-btn" onClick={ this.handleLogout }>
+                logout
+              </button>
+            </div>
             <span
               data-testid="total-field"
             >
@@ -69,18 +94,19 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  email: state.user.email,
   expenses: state.wallet.expenses,
   mobileButton: state.checkScreen.mobileType,
   formStatus: state.checkScreen.formStatus,
 });
 
 Header.propTypes = {
-  email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   mobileButton: PropTypes.bool.isRequired,
   formStatus: PropTypes.bool.isRequired,
   setForm: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
