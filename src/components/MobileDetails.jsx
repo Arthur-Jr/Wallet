@@ -5,12 +5,16 @@ import getCambio from '../globalFuncs/CambioFunc';
 import DeleteEditButtons from './DeleteEditButtons';
 import '../Css/MobileDetails.css';
 import { setDetailsStatus } from '../Redux/actions';
+import getKeyByValue from '../globalFuncs/getObjectKeyByValue';
+import Tags from '../util/Tags';
+import paymentMethods from '../util/paymentMethods';
 
 class MobileDetails extends React.Component {
   render() {
-    const { expense: { description, tag, method, value, currency, exchangeRates, id },
-      setDetails } = this.props;
-    const { ask, name } = exchangeRates[currency];
+    const { expense:
+      { description, tag, method, value, currency, exchangeRates, expenseId },
+    setDetails } = this.props;
+    const { ask, name } = exchangeRates.find(({ code }) => code === currency);
     const selectedCurrency = 'Real';
 
     return (
@@ -21,9 +25,9 @@ class MobileDetails extends React.Component {
             <h5>Descrição:</h5>
             <h4 id="description">{ description }</h4>
             <h5>Tag:</h5>
-            <h4 id="tag">{ tag }</h4>
+            <h4 id="tag">{ getKeyByValue(Tags, tag) }</h4>
             <h5>Método de pagamento:</h5>
-            <h4 id="method">{ method }</h4>
+            <h4 id="method">{ getKeyByValue(paymentMethods, method) }</h4>
             <h5>Valor:</h5>
             <h4 id="value">{ Number(value).toFixed(2) }</h4>
           </section>
@@ -40,7 +44,7 @@ class MobileDetails extends React.Component {
           </section>
         </div>
         <section className="button-section">
-          <DeleteEditButtons expenseId={ id } />
+          <DeleteEditButtons expenseId={ expenseId } />
         </section>
       </main>
     );
@@ -53,7 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 MobileDetails.propTypes = {
   expense: PropTypes.shape({
-    id: PropTypes.number,
+    expenseId: PropTypes.string,
     description: PropTypes.string,
     tag: PropTypes.string,
     method: PropTypes.string,
