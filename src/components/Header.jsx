@@ -6,7 +6,7 @@ import HeaderForm from './HeaderForm';
 import getCambio from '../globalFuncs/CambioFunc';
 import Button from './Controled-Components/Button';
 import '../Css/Header.css';
-import { setFormStatus } from '../Redux/actions';
+import { setFormStatus, addMultiExpenses } from '../Redux/actions';
 import localStorageVarNames from '../util/localStorageVarNames';
 
 class Header extends React.Component {
@@ -34,8 +34,9 @@ class Header extends React.Component {
   }
 
   handleLogout() {
-    const { history } = this.props;
+    const { history, addExpenses } = this.props;
     localStorage.removeItem(localStorageVarNames.jwtToken);
+    addExpenses([]);
     history.push('/wallet');
   }
 
@@ -91,6 +92,7 @@ class Header extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   setForm: (status) => dispatch(setFormStatus(status)),
+  addExpenses: (expenses) => dispatch(addMultiExpenses(expenses)),
 });
 
 const mapStateToProps = (state) => ({
@@ -104,6 +106,7 @@ Header.propTypes = {
   mobileButton: PropTypes.bool.isRequired,
   formStatus: PropTypes.bool.isRequired,
   setForm: PropTypes.func.isRequired,
+  addExpenses: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
