@@ -12,7 +12,7 @@ class DeleteEditButtons extends React.Component {
   handleEdit(id) {
     const { expenses, editExpense, setDetails, setForm } = this.props;
     const newEdit = expenses.find((expense) => (
-      expense.id === id
+      expense.expenseId === id
     ));
     editExpense(newEdit);
 
