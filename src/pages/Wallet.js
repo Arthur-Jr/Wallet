@@ -11,6 +11,7 @@ import Table from '../components/Table';
 import '../Css/App.css';
 import Footer from '../components/Footer';
 import getAllExpenses from '../api/getAllExpenses';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -19,7 +20,7 @@ class Wallet extends React.Component {
 
     this.checkSize();
 
-    const token = Jwt.decode(localStorage.getItem('token'));
+    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
     const timeAtMoment = new Date();
 
     if (!token) {

@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Jwt from 'jsonwebtoken';
 import { HttpStatusCode } from 'axios';
-import { logged } from '../Redux/actions';
 import Button from '../components/Controled-Components/Button';
 import Input from '../components/Controled-Components/Inputs';
 import registerLoginUser from '../api/registerLoginUser';
 import '../Css/Login.css';
 import logo from '../Image/new-logo.png';
 import getAllExpenses from '../api/getAllExpenses';
+import localStorageVarNames from '../util/localStorageVarNames';
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,8 +29,8 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    const { login, history } = this.props;
-    const token = Jwt.decode(localStorage.getItem('token'));
+    const { history } = this.props;
+    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
     const timeAtMoment = new Date();
 
     if (token) {
@@ -39,7 +38,6 @@ class Login extends React.Component {
         if (response.status !== HttpStatusCode.Forbidden
           && token.exp < timeAtMoment.getTime()) {
           history.push('/wallet/carteira');
-          login(token.sub);
         }
       });
     }
@@ -72,8 +70,7 @@ class Login extends React.Component {
 
   async handleClick() {
     const { email, password, isLogin } = this.state;
-    const { login, history } = this.props;
-    login(email);
+    const { history } = this.props;
 
     const response = await registerLoginUser({ username: email, password }, isLogin);
     if (response.token) {
@@ -140,15 +137,14 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  login: (email) => dispatch(logged(email)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   login: (email) => dispatch(logged(email)),
+// });
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;
