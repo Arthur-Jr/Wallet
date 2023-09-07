@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/wallet/static/css/main.41e8241d.chunk.css",
-    "main.js": "/wallet/static/js/main.2f074879.chunk.js",
-    "main.js.map": "/wallet/static/js/main.2f074879.chunk.js.map",
+    "main.css": "/wallet/static/css/main.cfa96d21.chunk.css",
+    "main.js": "/wallet/static/js/main.95204018.chunk.js",
+    "main.js.map": "/wallet/static/js/main.95204018.chunk.js.map",
     "runtime-main.js": "/wallet/static/js/runtime-main.40843306.js",
     "runtime-main.js.map": "/wallet/static/js/runtime-main.40843306.js.map",
-    "static/js/2.3c9e93db.chunk.js": "/wallet/static/js/2.3c9e93db.chunk.js",
-    "static/js/2.3c9e93db.chunk.js.map": "/wallet/static/js/2.3c9e93db.chunk.js.map",
+    "static/js/2.4cc9db7d.chunk.js": "/wallet/static/js/2.4cc9db7d.chunk.js",
+    "static/js/2.4cc9db7d.chunk.js.map": "/wallet/static/js/2.4cc9db7d.chunk.js.map",
     "index.html": "/wallet/index.html",
-    "precache-manifest.c82a37467217ea136c122cbc33869569.js": "/wallet/precache-manifest.c82a37467217ea136c122cbc33869569.js",
+    "precache-manifest.caf06ff3755a6dde2a4c66110e27c239.js": "/wallet/precache-manifest.caf06ff3755a6dde2a4c66110e27c239.js",
     "service-worker.js": "/wallet/service-worker.js",
-    "static/css/main.41e8241d.chunk.css.map": "/wallet/static/css/main.41e8241d.chunk.css.map",
-    "static/js/2.3c9e93db.chunk.js.LICENSE.txt": "/wallet/static/js/2.3c9e93db.chunk.js.LICENSE.txt",
-    "static/js/main.2f074879.chunk.js.LICENSE.txt": "/wallet/static/js/main.2f074879.chunk.js.LICENSE.txt",
+    "static/css/main.cfa96d21.chunk.css.map": "/wallet/static/css/main.cfa96d21.chunk.css.map",
+    "static/js/2.4cc9db7d.chunk.js.LICENSE.txt": "/wallet/static/js/2.4cc9db7d.chunk.js.LICENSE.txt",
+    "static/js/main.95204018.chunk.js.LICENSE.txt": "/wallet/static/js/main.95204018.chunk.js.LICENSE.txt",
     "static/media/Delete.png": "/wallet/static/media/Delete.41c8548e.png",
     "static/media/Edit.png": "/wallet/static/media/Edit.7ee6892c.png",
     "static/media/Login.css": "/wallet/static/media/background-img.ebf4c60f.jpg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.40843306.js",
-    "static/js/2.3c9e93db.chunk.js",
-    "static/css/main.41e8241d.chunk.css",
-    "static/js/main.2f074879.chunk.js"
+    "static/js/2.4cc9db7d.chunk.js",
+    "static/css/main.cfa96d21.chunk.css",
+    "static/js/main.95204018.chunk.js"
   ]
 }
