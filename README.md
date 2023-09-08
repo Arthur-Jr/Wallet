@@ -5,7 +5,7 @@
   
   A versão que está em deploy é uma versão "mock" do projeto, onde não está sendo usado o BACK-END!!!
   * Código da versão mock: https://github.com/Arthur-Jr/wallet/tree/mock-version
-  * código do back-end: https://github.com/Arthur-Jr/wallet-api
+  * Código do back-end: https://github.com/Arthur-Jr/wallet-api
 
 ---
 
