@@ -3,7 +3,7 @@
 ## Github pages :eyes:
   :arrow_right: https://arthur-jr.github.io/wallet/
   
-  conta default: email = test@email.com / password: test123
+  Essa é uma versão mock do projeto, logo não está sendo utilizado um back-end!
 
 ---
 
