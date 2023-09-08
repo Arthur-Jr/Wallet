@@ -3,7 +3,9 @@
 ## Github pages :eyes:
   :arrow_right: https://arthur-jr.github.io/wallet/
   
-  conta default: email = test@email.com / password: test123
+  A versão que está em deploy é uma versão "mock" do projeto, onde não está sendo usado o BACK-END!!!
+  * Código da versão mock: https://github.com/Arthur-Jr/wallet/tree/mock-version
+  * código do back-end: https://github.com/Arthur-Jr/wallet-api
 
 ---
 
