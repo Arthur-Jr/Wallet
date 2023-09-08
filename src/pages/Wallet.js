@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Jwt from 'jsonwebtoken';
-import { HttpStatusCode } from 'axios';
 import {
   fetchApi, setFormStatus, setScreenType, addMultiExpenses,
 } from '../Redux/actions';
@@ -10,30 +8,15 @@ import Header from '../components/Header';
 import Table from '../components/Table';
 import '../Css/App.css';
 import Footer from '../components/Footer';
-import getAllExpenses from '../api/getAllExpenses';
-import localStorageVarNames from '../util/localStorageVarNames';
 
 class Wallet extends React.Component {
   componentDidMount() {
-    const { fetchCurrency, history, addExpenses } = this.props;
+    const { fetchCurrency, addExpenses } = this.props;
     fetchCurrency();
 
     this.checkSize();
 
-    const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
-    const timeAtMoment = new Date();
-
-    if (!token) {
-      history.push('/wallet');
-    }
-
-    getAllExpenses(localStorage.getItem('token')).then((response) => {
-      if (response.status === HttpStatusCode.Forbidden
-        || token.exp > timeAtMoment.getTime()) {
-        history.push('/wallet');
-      }
-      return addExpenses(response.data.expensesList);
-    });
+    addExpenses(JSON.parse(localStorage.getItem('wallet-expenses')) || []);
   }
 
   checkSize() {
@@ -56,8 +39,8 @@ class Wallet extends React.Component {
         <section className="section-main">
           <Header history={ history } />
           <Table />
+          <Footer />
         </section>
-        <Footer />
       </main>
     );
   }

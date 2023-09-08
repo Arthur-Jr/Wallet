@@ -30,6 +30,9 @@ class Login extends React.Component {
 
   componentDidMount() {
     const { history } = this.props;
+    const walletEndpoint = '/wallet/carteira';
+    history.push(walletEndpoint);
+
     const token = Jwt.decode(localStorage.getItem(localStorageVarNames.jwtToken));
     const timeAtMoment = new Date();
 
@@ -37,7 +40,7 @@ class Login extends React.Component {
       getAllExpenses(localStorage.getItem('token')).then((response) => {
         if (response.status !== HttpStatusCode.Forbidden
           && token.exp < timeAtMoment.getTime()) {
-          history.push('/wallet/carteira');
+          history.push(walletEndpoint);
         }
       });
     }

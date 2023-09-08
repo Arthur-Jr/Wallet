@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import { expense, edit, modifyExpenses, setFormStatus } from '../Redux/actions';
 import Input from './Controled-Components/Inputs';
 import Select from './Controled-Components/select';
 import Button from './Controled-Components/Button';
-import addNewExpense from '../api/addExpense';
 import paymentMethods from '../util/paymentMethods';
 import Tags from '../util/Tags';
-import editExpense from '../api/editExpense';
-import localStorageVarNames from '../util/localStorageVarNames';
 
 const DEFAULT_STATE = {
   value: '',
@@ -46,19 +44,16 @@ class Form extends React.Component {
     this.setState({ [name]: value });
   }
 
-  async handleClick() {
-    const { addExpense, setForm, allCurrency } = this.props;
-    const { tag, method } = this.state;
+  handleClick() {
+    const { addExpense, setForm, allCurrency, expenses } = this.props;
 
-    const newExpense = await addNewExpense(
-      localStorage.getItem(localStorageVarNames.jwtToken),
-      {
-        ...this.state,
-        method: paymentMethods[method],
-        tag: Tags[tag],
-        exchangeRates: Object.values(allCurrency),
-      },
-    );
+    const newExpense = {
+      expenseId: uuidv4(),
+      ...this.state,
+      exchangeRates: Object.values(allCurrency),
+    };
+
+    localStorage.setItem('wallet-expenses', JSON.stringify([...expenses, newExpense]));
 
     if (newExpense) addExpense(newExpense);
     this.setState({ ...DEFAULT_STATE });
@@ -68,7 +63,7 @@ class Form extends React.Component {
     }
   }
 
-  async handleEditClick() {
+  handleEditClick() {
     const {
       expenseToEdit: { expenseId, exchangeRates },
       expenses,
@@ -76,21 +71,17 @@ class Form extends React.Component {
       editExpenseStatus,
       setForm,
     } = this.props;
-    const { tag, method } = this.state;
+    // const { tag, method } = this.state;
 
     const modifiedExpenses = expenses.filter((item) => item.expenseId !== expenseId);
-    const editedExpense = await editExpense(
+    const editedExpense = {
       expenseId,
-      {
-        expenseId,
-        ...this.state,
-        exchangeRates,
-        tag: Tags[tag],
-        method: paymentMethods[method],
-      },
-      localStorage.getItem(localStorageVarNames.jwtToken),
-    );
+      ...this.state,
+      exchangeRates,
+    };
+
     const expensesWithEditedExpense = [editedExpense, ...modifiedExpenses];
+    localStorage.setItem('wallet-expenses', JSON.stringify(expensesWithEditedExpense));
     modifyExpense(expensesWithEditedExpense);
     editExpenseStatus();
 

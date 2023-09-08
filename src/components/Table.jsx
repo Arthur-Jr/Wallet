@@ -6,9 +6,6 @@ import '../Css/Table.css';
 import MobileDetails from './MobileDetails';
 import DeleteEditButtons from './DeleteEditButtons';
 import { setDetailsStatus } from '../Redux/actions';
-import getKeyByValue from '../globalFuncs/getObjectKeyByValue';
-import Tags from '../util/Tags';
-import paymentMethods from '../util/paymentMethods';
 import sortExpenses from '../globalFuncs/sortExpenses';
 
 class Table extends React.Component {
@@ -41,8 +38,8 @@ class Table extends React.Component {
     return (
       <>
         <td>{ description }</td>
-        <td>{ getKeyByValue(Tags, tag) }</td>
-        <td>{ getKeyByValue(paymentMethods, method) }</td>
+        <td>{ tag }</td>
+        <td>{ method }</td>
         <td>{ Number(value).toFixed(2) }</td>
         <td>{ name.slice(0, name.indexOf('/')) }</td>
         <td>{ Number(ask).toFixed(2) }</td>
